@@ -129,11 +129,16 @@ class App : Application() {
             }
             h5 {
                 updating.updated {
-                    val worthSum = stateContainer.values.sumOf { it.get() }
-                    val mapWithOutThis = stateContainerMap.mapNotNull { it.takeIf { it.key != name }?.value }
-                    val netBenefit = worthSum - mapWithOutThis.maxOf { it.values.sumOf { it.get() } }
-                    content = "[$WORTH_DISPLAY_LABEL: $worthSum][$NET_BENEFIT_DISPLAY_LABEL: $netBenefit]"
-                    title.color = if (netBenefit >= 0) Color("green") else Color("red")
+                    try {
+                        val worthSum = stateContainer.values.sumOf { it.get() }
+                        val mapWithOutThis = stateContainerMap.mapNotNull { it.takeIf { it.key != name }?.value }
+                        val netBenefit = worthSum - mapWithOutThis.maxOf { it.values.sumOf { it.get() } }
+                        content = "[$WORTH_DISPLAY_LABEL: $worthSum][$NET_BENEFIT_DISPLAY_LABEL: $netBenefit]"
+                        title.color = if (netBenefit >= 0) Color("green") else Color("red")
+                    }
+                    catch (e: Exception) {
+                        println(e.stackTraceToString())
+                    }
                 }
             }
             choiceMaking(stateContainer)
