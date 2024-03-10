@@ -115,9 +115,10 @@ class App : Application() {
         val stateContainer: IntStateMap = mutableMapOf()
         stateContainerMap[name] = stateContainer
         val con = this
+        lateinit var title: H3
         return vPanel {
             hPanel {
-                h3(name)
+                title = h3(name)
                 button("x") {
                     onClick {
                         stateContainer.clear()
@@ -131,6 +132,7 @@ class App : Application() {
                     val worthSum = stateContainer.values.sumOf { it.get() }
                     val netBenefit = worthSum*2 - stateContainerMap.values.sumOf { it.values.sumOf { it.get() } }
                     content = "[$WORTH_DISPLAY_LABEL: $worthSum][$NET_BENEFIT_DISPLAY_LABEL: $netBenefit]"
+                    title.color = if (netBenefit >= 0) Color("green") else Color("red")
                 }
             }
             choiceMaking(stateContainer)
