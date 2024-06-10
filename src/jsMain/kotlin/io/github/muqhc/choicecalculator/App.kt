@@ -70,6 +70,7 @@ class App : Application() {
             val source = getUrlParamMap(window.location.href)["source"]
             vPanel {
                 lateinit var text: Text
+                link("Example","https://muqhc.github.io/choicecalculator/?source=eyLrsJTrgpjrgpgiOnsi6rCA7LmYIjoxMjAwLCIt6rCA6rKpIjotMTAwMH0sIuyCrOqzvCI6eyLqsIDsuZgiOjEzMDAsIi3qsIDqsqkiOi0xMjAwfSwi67mE6rWs66ekIjp7IuqwgOy5mCI6MCwiLeqwgOqyqSI6MH19")
                 button("share link") {
                     onClick {
                         val origin = window.location.href
